@@ -45,6 +45,7 @@
             liff.init({
                 liffId: liffId
             }).then(() => {
+                getData();
                 initializeApp();
             }).catch((err) => {
                 console.log('LIFF Initialization failed ', err);
@@ -52,7 +53,6 @@
         }
 
         function initializeApp() {
-            getData();
         }
 
         function makeRegisterJson() {
