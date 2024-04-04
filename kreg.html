@@ -9,16 +9,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
 </head>
 <body>
-
-    <input type="button" value="Reload Page" onClick="window.location.reload();">
+    <input type="button" value="Reload" onClick="window.location.reload();">
     <form class="w-75 mx-auto">
         <p class="mt-3">名前</p>
         <div>
-            <input class="form-control w-100 mt-1" name="name" placeholder="" required>
+            <input class="form-control w-100 mt-1" id="name" placeholder="" required>
         </div>
         <p class="mt-3">学年</p>
         <div>
-            <input class="form-control w-100 mt-1" name="grade" placeholder="" required>
+            <select class="form-control w-100 mt-1" id="grade" required>
+                <option value="1">小1</option>
+                <option value="2">小2</option>
+                <option value="3">小3</option>
+                <option value="4">小4</option>
+                <option value="5">小5</option>
+                <option value="6">小6</option>
+            </select>
         </div>
         <input type="submit" class="mt-4 btn btn-primary" value="登録">
     </form>
@@ -31,7 +37,8 @@
     <script>
 
         $(document).ready(function () {
-            const liffId = "2004463890-g4x2M0r5";
+            getData();
+            const liffId = '2004463890-g4x2M0r5';
             initializeLiff(liffId);
         })
 
@@ -45,25 +52,48 @@
             });
         }
 
-        function sendText(text) {
-            liff.sendMessages([{
-                'type': 'text',
-                'text': text
-            }]).then(function () {
-                liff.closeWindow();
-            }).catch(function (error) {
-                window.alert('Failed to send message ' + error);
-            });
+        function makeRegisterJson() {
+                const name  = $('#name').val();
+                const grade = $('#grade').val();
+                const json = {
+                    message: 'register',
+                    params: {
+                        name: name,
+                        grade: grade
+                    }
+                };
+                return json;
         }
+
+        async function getData() {
+            const endPoint = 'https://script.google.com/macros/s/AKfycbyxVh84MzVv0ng2VfSlWfjWi8qc8bI2ROFYSQfBjCJMGXYDFWeT7NU0G0d0BI6GcRNrRg/exec';
+            const idToken = liff.getIDToken();
+            const data = {
+                message: 'getAllKids',
+                param: {
+                    idToken: idToken,
+                },
+            };
+            console.log('getData');
+            const resA = await fetch(endPoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: JSON.stringify({ data: data }),
+            })
+            console.log('response A', resA);
+            const json = await resA.json();
+            console.log('response Json', json);
+        };
 
         const params = (new URL(document.location)).searchParams;
         const key = params.get('key');
 
         $(function () {
             $('form').submit(function () {
-                const name  = $('input[name="name"]').val();
-                const msg   = `${name}`;
-                sendText(msg);
+                const value = getData();
+                console.log(value);
                 return false;
             });
         });
