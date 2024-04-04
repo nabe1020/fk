@@ -39,7 +39,6 @@
         $(document).ready(function () {
             const liffId = '2004463890-g4x2M0r5';
             initializeLiff(liffId);
-            getData();
         })
 
         function initializeLiff(liffId) {
@@ -50,6 +49,10 @@
             }).catch((err) => {
                 console.log('LIFF Initialization failed ', err);
             });
+        }
+
+        function initializeApp() {
+            getData();
         }
 
         function makeRegisterJson() {
