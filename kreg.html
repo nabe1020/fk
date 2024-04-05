@@ -41,19 +41,13 @@
             initializeLiff(liffId);
         })
 
-        function initializeLiff(liffId) {
-            liff.init({
-                liffId: liffId
-            }).then(() => {
-                getData();
-            }).then(() => {
-                initializeApp();
-            }).catch((err) => {
-                console.log('LIFF Initialization failed ', err);
-            });
+        async function initializeLiff(liffId) {
+            await liff.init({liffId: liffId});
+            initializeApp();
         }
 
         function initializeApp() {
+            getData();
         }
 
         function makeRegisterJson() {
@@ -71,16 +65,13 @@
 
         async function getData() {
             const endPoint = 'https://script.google.com/macros/s/AKfycbyxVh84MzVv0ng2VfSlWfjWi8qc8bI2ROFYSQfBjCJMGXYDFWeT7NU0G0d0BI6GcRNrRg/exec';
-            // const idToken = liff.getIDToken();
+            const idToken = liff.getIDToken();
             const data = {
                 message: 'getAllKids',
-            /*
                 param: {
                     idToken: idToken,
                 },
-            */
             };
-            console.log('getData');
             const resA = await fetch(endPoint, {
                 method: 'POST',
                 headers: {
