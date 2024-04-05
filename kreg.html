@@ -68,9 +68,11 @@
             const idToken = liff.getIDToken();
             const data = {
                 message: 'getAllKids',
-                param: {
-                    idToken: idToken,
-                },
+                {
+                    param: {
+                        idToken: idToken,
+                    },
+                }
             };
             const resA = await fetch(endPoint, {
                 method: 'POST',
