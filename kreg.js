@@ -15,6 +15,14 @@ async function post(message, param) {
     return await response.json();
 }
 
+async function logClient(log) {
+    const message = 'logClient';
+    const param = {
+        log: log,
+    };
+    return post(message, param);
+}
+
 async function getAllKids(idToken) {
     const message = 'getAllKids';
     const param = {
