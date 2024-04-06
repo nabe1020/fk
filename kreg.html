@@ -46,6 +46,9 @@
     <script src="liff_util.js"></script>
     <script>
         $(document).ready(function () {
+            let select = document.getElementById("target");
+            select.addEventListener('change', onChangeTarget);
+
             const liffId = '2004463890-g4x2M0r5';
             initializeLiff(liffId);
         })
@@ -66,12 +69,14 @@
                 option.value = kid['grade'] + ',' + kid['id'];
                 select.appendChild(option);
             });
-            select.addEventListener('change', onChangeTarget);
         }
         
         function onChangeTarget(event){
-            $('#name' ).val(event.currentTarget.name );
-            $('#grade').val(event.currentTarget.value);
+            let tgt   = event.currentTarget;
+            let text  = tgt.options[tgt.selectedIndex].textContent;
+            let value = tgt.value;
+            $('#name' ).val(text );
+            $('#grade').val(value);
         }
 
         $(function () {
