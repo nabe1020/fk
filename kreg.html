@@ -11,9 +11,9 @@
 <body>
     <input type="button" value="Reload" onClick="window.location.reload();">
     <form class="w-75 mx-auto">
-        <p class="mt-3">学年</p>
+        <p class="mt-3">対象</p>
         <div>
-            <select class="form-control w-100 mt-1" id="grade" required>
+            <select class="form-control w-100 mt-1" id="target" required>
                 <option value="1">--- 新規 ---</option>
             </select>
         </div>
@@ -56,20 +56,20 @@
 
         function initializeApp() {
             const idToken = liff.getIDToken();
-            getAllKids(idToken);
+            let kids = getAllKids(idToken);
+            let select = document.getElementById("target");
+            kids.forEach(function(kid){
+                let option = document.createElement("option");
+                option.text  = kid['name'];
+                option.value = kid['grade'] + ',' + kid['id'];
+                select.appendChild(option);
+            });
+            select.addEventListener('change', onChangeTarget);
         }
         
-        function makeRegisterJson() {
-            const name  = $('#name').val();
-            const grade = $('#grade').val();
-            const json = {
-                message: 'register',
-                params: {
-                    name: name,
-                    grade: grade
-                }
-            };
-            return json;
+        function onChangeTarget(event){
+            $('#name' ).val(event.currentTarget.name );
+            $('#grade').val(event.currentTarget.value);
         }
 
         $(function () {
