@@ -47,8 +47,7 @@
         }
 
         function initializeApp() {
-            makeRegisterJson("aaa", "bbb");
-//            getData();
+            getData();
         }
 
         const params = (new URL(document.location)).searchParams;
@@ -56,10 +55,8 @@
 
         $(function () {
             $('form').submit(function () {
-/*    
                 const value = getData();
                 console.log(value);
-*/
                 return false;
             });
         });
