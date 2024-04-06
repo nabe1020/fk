@@ -49,7 +49,7 @@
         function initializeApp() {
             const idToken = liff.getIDToken();
             console.log(idToken);
-            getData();
+            getAllKids(idToken);
         }
 
         const params = (new URL(document.location)).searchParams;
