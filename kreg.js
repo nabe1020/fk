@@ -1,9 +1,3 @@
-
-import liff from '@line/liff';
-import LIFFInspectorPlugin from '@line/liff-inspector';
-
-liff.use(new LIFFInspectorPlugin());
-
 function makeRegisterJson(name, grade) {
         const json = {
             message: 'register',
