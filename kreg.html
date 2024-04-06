@@ -52,9 +52,19 @@
             const idToken = liff.getIDToken();
             getAllKids(idToken);
         }
-
-        const params = (new URL(document.location)).searchParams;
-        const key = params.get('key');
+        
+        function makeRegisterJson() {
+            const name  = $('#name').val();
+            const grade = $('#grade').val();
+            const json = {
+                message: 'register',
+                params: {
+                    name: name,
+                    grade: grade
+                }
+            };
+            return json;
+        }
 
         $(function () {
             $('form').submit(function () {

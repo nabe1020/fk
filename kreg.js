@@ -31,25 +31,11 @@ async function getAllKids(idToken) {
     return post(message, param);
 }
 
-async function getData() {
-    // const idToken = liff.getIDToken();
-    const data = {
-        message: 'getAllKids',
-    /*
-        param: {
-            idToken: idToken,
-        },
-    */
+async function addKid(idToken, name) {
+    const message = 'addKid';
+    const param = {
+        idToken: idToken,
+        name: name
     };
-    console.log('getData');
-    const resA = await fetch(endPoint, {
-        method: 'POST',
-        headers: {
-            'Content-Type':'application/x-www-form-urlencoded'
-        },
-        body: JSON.stringify({ data: data }),
-    })
-    console.log('response A', resA);
-    const json = await resA.json();
-    console.log('response Json', json);
-};
+    return post(message, param);
+}
