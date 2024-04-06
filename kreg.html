@@ -43,11 +43,11 @@
 
         async function initializeLiff(liffId) {
             await liff.init({liffId: liffId});
+            getData();
             initializeApp();
         }
 
         function initializeApp() {
-            getData();
         }
 
         function makeRegisterJson() {
