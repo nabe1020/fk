@@ -1,4 +1,4 @@
-function makeRegisterJson(name, grade) {
+export default function makeRegisterJson(name, grade) {
         const json = {
             message: 'register',
             params: {
@@ -9,7 +9,7 @@ function makeRegisterJson(name, grade) {
         return json;
 }
 
-async function getData() {
+export default async function getData() {
     const endPoint = 'https://script.google.com/macros/s/AKfycbyxVh84MzVv0ng2VfSlWfjWi8qc8bI2ROFYSQfBjCJMGXYDFWeT7NU0G0d0BI6GcRNrRg/exec';
     // const idToken = liff.getIDToken();
     const data = {
