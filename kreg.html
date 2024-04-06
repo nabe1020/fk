@@ -38,6 +38,8 @@
 
         import liff from '@line/liff';
         import LIFFInspectorPlugin from '@line/liff-inspector';
+        
+        liff.use(new LIFFInspectorPlugin());
 
         $(document).ready(function () {
             const liffId = '2004463890-g4x2M0r5';
@@ -45,7 +47,6 @@
         })
 
         async function initializeLiff(liffId) {
-            liff.use(new LIFFInspectorPlugin());
             await liff.init({liffId: liffId});
             initializeApp();
         }
