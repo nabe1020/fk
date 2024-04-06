@@ -34,7 +34,8 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
-    <script type="module">
+    <script src="kreg.html" type="module"></script>
+    <script>
         import liff from '@line/liff';
         import LIFFInspectorPlugin from '@line/liff-inspector';
 
@@ -53,43 +54,6 @@
         function initializeApp() {
             getData();
         }
-
-        function makeRegisterJson() {
-                const name  = $('#name').val();
-                const grade = $('#grade').val();
-                const json = {
-                    message: 'register',
-                    params: {
-                        name: name,
-                        grade: grade
-                    }
-                };
-                return json;
-        }
-
-        async function getData() {
-            const endPoint = 'https://script.google.com/macros/s/AKfycbyxVh84MzVv0ng2VfSlWfjWi8qc8bI2ROFYSQfBjCJMGXYDFWeT7NU0G0d0BI6GcRNrRg/exec';
-            // const idToken = liff.getIDToken();
-            const data = {
-                message: 'getAllKids',
-            /*
-                param: {
-                    idToken: idToken,
-                },
-            */
-            };
-            console.log('getData');
-            const resA = await fetch(endPoint, {
-                method: 'POST',
-                headers: {
-                    'Content-Type':'application/x-www-form-urlencoded'
-                },
-                body: JSON.stringify({ data: data }),
-            })
-            console.log('response A', resA);
-            const json = await resA.json();
-            console.log('response Json', json);
-        };
 
         const params = (new URL(document.location)).searchParams;
         const key = params.get('key');
