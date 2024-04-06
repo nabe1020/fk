@@ -31,11 +31,12 @@ async function getAllKids(idToken) {
     return post(message, param);
 }
 
-async function addKid(idToken, name) {
+async function addKid(idToken, name, grade) {
     const message = 'addKid';
     const param = {
         idToken: idToken,
-        name: name
+        name: name,
+        grade: grade
     };
     return post(message, param);
 }

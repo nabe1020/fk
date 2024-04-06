@@ -68,7 +68,10 @@
 
         $(function () {
             $('form').submit(function () {
-                const value = getData();
+                const idToken = liff.getIDToken();
+                const name    = $('#name').val();
+                const grade   = $('#grade').val();
+                const value   = addKid(idToken, name, grade);
                 console.log(value);
                 return false;
             });
