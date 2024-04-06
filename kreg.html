@@ -59,7 +59,7 @@
 
         function initializeApp() {
             const idToken = liff.getIDToken();
-            let kids = getAllKids(idToken).result;
+            let kids = getAllKids(idToken)["result"];
             let select = document.getElementById("target");
             kids.forEach(function(kid){
                 let option = document.createElement("option");
