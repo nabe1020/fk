@@ -9,7 +9,7 @@ export default function makeRegisterJson(name, grade) {
         return json;
 }
 
-export default async function getData() {
+export async function getData() {
     const endPoint = 'https://script.google.com/macros/s/AKfycbyxVh84MzVv0ng2VfSlWfjWi8qc8bI2ROFYSQfBjCJMGXYDFWeT7NU0G0d0BI6GcRNrRg/exec';
     // const idToken = liff.getIDToken();
     const data = {
