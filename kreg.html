@@ -59,14 +59,16 @@
 
         function initializeApp() {
             const idToken = liff.getIDToken();
-            let kids = getAllKids(idToken)["result"];
+            let response = getAllKids(idToken);
+            logClient(JSON.stringify(response));
+            let kids   = response["result"];
             let select = document.getElementById("target");
-            kids.forEach(function(kid){
+            for (index = 0; index < kids.length; index ++) {
                 let option = document.createElement("option");
-                option.text  = kid['name'];
-                option.value = kid['grade'] + ',' + kid['id'];
+                option.text  = kids[index]['name'];
+                option.value = kids[index]['grade'] + ',' + kids[index]['id'];
                 select.appendChild(option);
-            });
+            }
         }
         
         function onChangeTarget(event){
