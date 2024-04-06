@@ -60,8 +60,6 @@
         async function initializeApp() {
             const idToken = liff.getIDToken();
             let response = await getAllKids(idToken);
-            logClient("testestsetsetse");
-            logClient(JSON.stringify(response));
             let kids   = response["result"];
             let select = document.getElementById("target");
             for (index = 0; index < kids.length; index ++) {
