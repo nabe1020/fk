@@ -56,12 +56,9 @@
             let response = await getAllKids(idToken);
             let kids     = response["result"];
             for (index = 0; index < kids.length; index ++) {
-                targetList.push({
-                    name:  kids[index]['name'], 
-                    grade: kids[index]['grade'], 
-                    id:    kids[index]['id']
-                });
+                targetList.push(kids[index]);
             }
+            return targetList;
         }
 
         function clearTargetList() {
