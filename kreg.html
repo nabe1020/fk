@@ -128,7 +128,7 @@
 
         const onDeleteHandler = async () => {
             const id     = $('#id'   ).val();
-            const result = await deleteKid(name);
+            const result = await deleteKid(id);
             refreshTargetList();
         }
 
