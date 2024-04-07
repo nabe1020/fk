@@ -40,3 +40,11 @@ async function addKid(idToken, name, grade) {
     };
     return post(message, param);
 }
+
+async function deleteKid(id) {
+    const message = 'deleteKid';
+    const param = {
+        id: id
+    };
+    return post(message, param);
+}
