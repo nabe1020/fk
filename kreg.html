@@ -74,7 +74,8 @@
 
         async function refreshTargetList() {
             let targetList = await refreshTargetListData();
-            let select = clearTargetList();
+            logClient(JSON.stringify({targetList}));
+            let select = await clearTargetList();
             for (index = 0; index < targetList.length; index ++) {
                 let option = document.createElement("option");
                 option.text  = targetList[index]['name'];
