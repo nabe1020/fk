@@ -71,7 +71,6 @@
 
         async function refreshTargetList() {
             let targetList = await refreshTargetListData();
-            logClient(JSON.stringify({targetList}));
             let select = await clearTargetList();
             for (index = 0; index < targetList.length; index ++) {
                 let option = document.createElement("option");
@@ -127,7 +126,7 @@
         }
 
         const onDeleteHandler = async () => {
-            const id     = $('#id'   ).val();
+            const id     = $('#id').val();
             const result = await deleteKid(id);
             refreshTargetList();
         }
