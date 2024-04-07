@@ -120,7 +120,12 @@
             const name    = $('#name' ).val();
             const grade   = $('#grade').val();
             const id      = $('#id'   ).val();
-            const result  = await addKid(idToken, name, grade);
+            let result;
+            if (id == '') {
+                result  = await addKid(idToken, name, grade);
+            } else {
+                result  = await updateKid(id, name, grade);
+            }
             refreshTargetList();
         }
 
