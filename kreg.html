@@ -77,6 +77,8 @@
         async function refreshTargetList() {
             let targetList = await refreshTargetListData();
             let select = await clearTargetList();
+            $('.loader').delay(500).fadeOut(500);
+            $('.loader-bg').delay(800).fadeOut(700);
             for (index = 0; index < targetList.length; index ++) {
                 let option = document.createElement("option");
                 option.text  = targetList[index]['name'];
@@ -101,8 +103,6 @@
 
         async function initializeApp() {
             refreshTargetList();
-            $('.loader').delay(500).fadeOut(500);
-            $('.loader-bg').delay(800).fadeOut(700);
         }
         
         function onChangeTarget(event){
