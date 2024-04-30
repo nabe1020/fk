@@ -42,7 +42,7 @@
         async function refreshTargetListData() {
             let targetList = [];
             const idToken = liff.getIDToken();
-            let response = await getAllKids(idToken);
+            let response = await getAllKids(channelId, idToken);
             let kids     = response["result"];
             for (index = 0; index < kids.length; index ++) {
                 targetList.push(kids[index]);
