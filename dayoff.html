@@ -38,7 +38,6 @@
     <script>
         async function refreshTargetListData() {
             let targetList = [];
-            targetList.push(newTarget);
             const idToken = liff.getIDToken();
             let response = await getAllKids(idToken);
             let kids     = response["result"];
@@ -84,7 +83,14 @@
             refreshTargetList();
         }
 
-        const onRegisterHandler = async () => {
+        const onDayoffHandler = async () => {
+            const idToken = liff.getIDToken();
+            const name    = $('#target').text();
+            const id      = $('#target').val();
+            let result = await updateKid(id, name, id);
+        }
+
+        const onLateHandler = async () => {
             const idToken = liff.getIDToken();
             const name    = $('#target').text();
             const id      = $('#target').val();
