@@ -23,17 +23,19 @@ async function logClient(log) {
     return post(message, param);
 }
 
-async function getAllKids(idToken) {
+async function getAllKids(channelId, idToken) {
     const message = 'getAllKids';
     const param = {
-        idToken: idToken,
+        channelId: channelId,
+        idToken: idToken
     };
     return post(message, param);
 }
 
-async function addKid(idToken, name, grade) {
+async function addKid(channelId, idToken, name, grade) {
     const message = 'addKid';
     const param = {
+        channelId: channelId,
         idToken: idToken,
         name: name,
         grade: grade
@@ -41,9 +43,10 @@ async function addKid(idToken, name, grade) {
     return post(message, param);
 }
 
-async function deleteKid(id) {
+async function deleteKid(channelId, id) {
     const message = 'deleteKid';
     const param = {
+        channelId: channelId,
         id: id
     };
     return post(message, param);
