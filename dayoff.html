@@ -1,0 +1,113 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <title>お休み連絡</title>
+    <link rel="stylesheet" href="loader.css" type="text/css" media="all">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
+</head>
+
+<body>
+    <div class="loader-bg">
+        <div class="loader"></div>
+    </div>
+    <header></header>
+    <input type="button" value="Reload" onClick="window.location.reload();">
+    <form class="w-75 mx-auto">
+        <p class="mt-3">対象</p>
+        <div>
+            <select class="form-control w-100 mt-1" id="target" >
+            </select>
+        </div>
+        <div>
+            <input class="form-control w-100 mt-1" id="id" placeholder="" readonly>
+        </div>
+        <input type="submit" class="mt-4 btn btn-primary" id="dayoff" value="お休み">
+        <input type="submit" class="mt-4 btn btn-primary" id="late"   value="遅刻">
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+    <script src="liff_util.js"></script>
+    <script>
+        async function refreshTargetListData() {
+            let targetList = [];
+            targetList.push(newTarget);
+            const idToken = liff.getIDToken();
+            let response = await getAllKids(idToken);
+            let kids     = response["result"];
+            for (index = 0; index < kids.length; index ++) {
+                targetList.push(kids[index]);
+            }
+            return targetList;
+        }
+
+        function clearTargetList() {
+            let select = document.getElementById("target");
+            while(select.lastChild) {
+                select.removeChild(select.lastChild);
+            }
+            return select;
+        }
+
+        async function refreshTargetList() {
+            let targetList = await refreshTargetListData();
+            let select = await clearTargetList();
+            $('.loader').delay(500).fadeOut(500);
+            $('.loader-bg').delay(800).fadeOut(700);
+            for (index = 0; index < targetList.length; index ++) {
+                let option = document.createElement("option");
+                option.text  = targetList[index]['name'];
+                option.value = targetList[index]['id'];
+                select.appendChild(option);
+            }
+        }
+
+        $(document).ready(function () {
+            const liffId = '2004463890-g4x2M0r5';
+            initializeLiff(liffId);
+        })
+
+        async function initializeLiff(liffId) {
+            clearExpiredIdToken(liffId);
+            await liff.init({liffId: liffId});
+            initializeApp();
+        }
+
+        async function initializeApp() {
+            refreshTargetList();
+        }
+
+        const onRegisterHandler = async () => {
+            const idToken = liff.getIDToken();
+            const name    = $('#target').text();
+            const id      = $('#target').val();
+            let result = await updateKid(id, name, id);
+        }
+
+        const handlerTable = {
+            'dayoff': onDayoffHandler,
+            'late':   onLateHandler
+        };
+
+        $(function () {
+            $('form').on('submit', function (e) {
+                e.preventDefault();
+                const click_id = e.originalEvent.submitter.id;
+                console.log(click_id);
+                if (click_id in handlerTable) {
+                    handlerTable[click_id]();
+                }
+                return false;
+            });
+        });
+    </script>
+
+</body>
+</html>
