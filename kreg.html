@@ -53,12 +53,13 @@
     <script src="liff_util.js"></script>
     <script>
         const newTarget = {name: "====== 新規作成 ======", grade: 1, id: ""};
+        const channelId = '2004463890';
 
         async function refreshTargetListData() {
             let targetList = [];
             targetList.push(newTarget);
             const idToken = liff.getIDToken();
-            let response = await getAllKids(idToken);
+            let response = await getAllKids(channelId, idToken);
             let kids     = response["result"];
             for (index = 0; index < kids.length; index ++) {
                 targetList.push(kids[index]);
@@ -130,16 +131,16 @@
             const id      = $('#id'   ).val();
             let result;
             if (id == '') {
-                result  = await addKid(idToken, name, grade);
+                result  = await addKid(channelId, idToken, name, grade);
             } else {
-                result  = await updateKid(id, name, grade);
+                result  = await updateKid(channelId, id, name, grade);
             }
             refreshTargetList();
         }
 
         const onDeleteHandler = async () => {
             const id     = $('#id').val();
-            const result = await deleteKid(id);
+            const result = await deleteKid(channelId, id);
             refreshTargetList();
         }
 
