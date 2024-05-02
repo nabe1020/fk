@@ -11,9 +11,11 @@
 </head>
 
 <body>
+<!--
     <div class="loader-bg">
         <div class="loader"></div>
     </div>
+-->
     <header></header>
     <input type="button" value="Reload" onClick="window.location.reload();">
     <form class="w-75 mx-auto">
@@ -22,8 +24,16 @@
             <select multiple class="form-control w-100 mt-1" id="target" >
             </select>
         </div>
+        <fieldset>
+            <legend>Select a maintenance drone:</legend>
+            <div>
+                <label for="illness"><input type="radio" id="illness" name="reason" value="体調不良">体調不良</label>
+                <label for="injury"> <input type="radio" id="injury"  name="reason" value="怪我"    >怪我</label>
+                <label for="private"><input type="radio" id="private" name="reason" value="私用"    >私用</label>
+            </div>
+        </fieldset>
         <div>
-            <input class="form-control w-100 mt-1" id="id" placeholder="" readonly>
+            <input class="form-control w-100 mt-1" id="id" placeholder="">
         </div>
         <input type="submit" class="mt-4 btn btn-primary" id="dayoff" value="お休み">
         <input type="submit" class="mt-4 btn btn-primary" id="late"   value="遅刻">
