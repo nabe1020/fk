@@ -11,41 +11,46 @@
 </head>
 
 <body>
-<!--
     <div class="loader-bg">
         <div class="loader"></div>
     </div>
--->
+
     <header></header>
-    <input type="button" value="Reload" onClick="window.location.reload();">
+
+    <p><input type="button" value="Reload" onClick="window.location.reload();">
     <form class="w-75 mx-auto">
+        <p class="mt-3">日付</p>
+        <input type="date" id="date" name="trip-start" />
         <p class="mt-3">対象</p>
         <div>
-            <select multiple class="form-control w-100 mt-1" id="target" >
-            </select>
+            <p><select multiple class="form-control w-100 mt-1" id="target" ></select>
         </div>
-        <fieldset>
-            <legend>Select a maintenance drone:</legend>
-            <div>
+        <p class="mt-3">欠席理由</p>
+        <div>
+            <fieldset>
                 <label for="illness"><input type="radio" id="illness" name="reason" value="体調不良">体調不良</label>
                 <label for="injury"> <input type="radio" id="injury"  name="reason" value="怪我"    >怪我</label>
                 <label for="private"><input type="radio" id="private" name="reason" value="私用"    >私用</label>
-            </div>
-        </fieldset>
+            </fieldset>
+        </div>
+        <p class="mt-3">備考</p>
         <div>
-            <input class="form-control w-100 mt-1" id="id" placeholder="">
+            <input class="form-control w-100 mt-1" id="description" placeholder="">
         </div>
         <input type="submit" class="mt-4 btn btn-primary" id="dayoff" value="お休み">
         <input type="submit" class="mt-4 btn btn-primary" id="late"   value="遅刻">
     </form>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.4/i18n/jquery.ui.datepicker-ja.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
     <script src="kreg.js"></script>
     <script src="liff_util.js"></script>
+    
     <script>
         const channelId = '2004767861';
 
@@ -82,6 +87,7 @@
         }
 
         $(document).ready(function () {
+            setToday("date");
             const liffId = '2004767861-K5Wv2oBD';
             initializeLiff(liffId);
         })
